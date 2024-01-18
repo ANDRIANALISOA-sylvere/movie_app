@@ -8,6 +8,7 @@ export default  function App()
     const [search,setSearch]=useState("");
     const [overview,setOverview]=useState("");
     const [title,setTitle]=useState("");
+    const [img,setImg]=useState("");
 
     useEffect(() => {
         if (search)
@@ -32,9 +33,10 @@ export default  function App()
 
     const imagePath="https://image.tmdb.org/t/p/w500";
 
-    const handleClick = (o,t) => {
+    const handleClick = (o,t,i) => {
         setOverview(o);
         setTitle(t);
+        setImg(i);
     }
     return (
         <div className="container mt-5 mb-5">
@@ -58,7 +60,7 @@ export default  function App()
                                         </div>
                                         <div className="row">
                                             <div className="col-md-5">
-                                                <button type="button" className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={()=> handleClick(movie.overview,movie.title)}>Description</button>
+                                                <button type="button" className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={()=> handleClick(movie.overview,movie.title,imagePath+movie.backdrop_path)}>Description</button>
                                             </div>
                                             <div className="col-md-7">
                                                 <small>Date : {movie.release_date}</small>
@@ -72,7 +74,14 @@ export default  function App()
                                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div className="modal-body" style={{color:'black'}}>
-                                                        <p>{overview}</p>
+                                                        <div className="text-center">
+                                                            <figure>
+                                                                <img src={img} alt="" className="img-fluid"/>
+                                                            </figure>
+                                                        </div>
+                                                        <figcaption>
+                                                            <p>{overview}</p>
+                                                        </figcaption>
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
