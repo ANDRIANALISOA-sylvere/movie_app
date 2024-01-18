@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap'
 import './App.css'
 export default  function App()
 {
     const [movies,setMovie]=useState([]);
     const [search,setSearch]=useState("");
+    const [overview,setOverview]=useState("");
 
     useEffect(() => {
         if (search)
@@ -28,6 +30,11 @@ export default  function App()
     }, [search]);
 
     const imagePath="https://image.tmdb.org/t/p/w500";
+
+    const handleClick = (o) => {
+        setOverview(o);
+        console.log(o);
+    }
     return (
         <div className="container mt-5 mb-5">
             <div className="mb-3">
@@ -50,25 +57,24 @@ export default  function App()
                                         </div>
                                         <div className="row">
                                             <div className="col-md-5">
-                                                <button type="button" className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Description</button>
+                                                <button type="button" className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={()=> handleClick(movie.overview)}>Description</button>
                                             </div>
                                             <div className="col-md-7">
                                                 <small>Date : {movie.release_date}</small>
                                             </div>
                                         </div>
                                         <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div className="modal-dialog">
+                                            <div className="modal-dialog modal-dialog-scrollable">
                                                 <div className="modal-content">
-                                                    <div className="modal-header">
-                                                        <h1 className="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                                    <div className="modal-header bg-primary">
+                                                        <h1 className="modal-title fs-5" id="staticBackdropLabel" style={{color:"white"}}>Modal title</h1>
                                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
-
+                                                    <div className="modal-body" style={{color:'black'}}>
+                                                        <p>{overview}</p>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Understood</button>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                                                     </div>
                                                 </div>
                                             </div>
