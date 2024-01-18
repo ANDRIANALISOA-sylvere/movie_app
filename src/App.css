@@ -1,6 +1,6 @@
 body,.card
 {
-    background-color: #09347A;
+    background-color: #04275F;
     color:white
 }
 .card
@@ -10,5 +10,19 @@ body,.card
 .card-body
 {
     border-top: none !important;
-    background-color: #04275F;
+    background-color: #09347A;
+}
+.form-control
+{
+    background-color: #09347A;
+    color:white !important;
+    border:none !important;
+}
+.form-control:focus
+{
+    background-color: #09347A;
+}
+.form-control::placeholder
+{
+    color:white !important;
 }
