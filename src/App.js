@@ -4,21 +4,34 @@ import './App.css'
 export default  function App()
 {
     const [movies,setMovie]=useState([]);
+    const [search,setSearch]=useState("");
+
     useEffect(() => {
-        const fetchmovie = async()=>{
-            const res = await fetch("https://api.themoviedb.org/3/discover/movie?api_key=7212e9c9a507d1f8bb208baf5ac276b5&page=1")
-            const data=await res.json()
-            setMovie(data.results);
+        if (search)
+        {
+            const searchmovie = async()=>{
+                const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${search}&api_key=7212e9c9a507d1f8bb208baf5ac276b5`)
+                const data=await res.json()
+                setMovie(data.results);
+            }
+            searchmovie();
+        }else
+        {
+            const fetchmovie = async()=>{
+                const res = await fetch("https://api.themoviedb.org/3/discover/movie?api_key=7212e9c9a507d1f8bb208baf5ac276b5&page=1")
+                const data=await res.json()
+                setMovie(data.results);
+            }
+            fetchmovie();
         }
 
-        fetchmovie();
-    }, []);
+    }, [search]);
 
     const imagePath="https://image.tmdb.org/t/p/w500";
     return (
         <div className="container mt-5 mb-5">
             <div className="mb-3">
-                <input type="text" className="form-control" placeholder="Chercher un film ..."/>
+                <input type="text" className="form-control" placeholder="Chercher un film ..." value={search} onChange={(e)=> setSearch(e.target.value)}/>
             </div>
             <div className="row">
                 {movies.length > 0 ? (
