@@ -1,16 +1,19 @@
-body,.card
+body
 {
     background-color: #04275F;
     color:white
 }
 .card
 {
-    border-radius: 0px !important;
+    padding: 0;
+    border: none !important;
 }
+
 .card-body
 {
     border-top: none !important;
     background-color: #09347A;
+    color:white !important;
 }
 .form-control
 {
