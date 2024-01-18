@@ -7,6 +7,7 @@ export default  function App()
     const [movies,setMovie]=useState([]);
     const [search,setSearch]=useState("");
     const [overview,setOverview]=useState("");
+    const [title,setTitle]=useState("");
 
     useEffect(() => {
         if (search)
@@ -31,9 +32,9 @@ export default  function App()
 
     const imagePath="https://image.tmdb.org/t/p/w500";
 
-    const handleClick = (o) => {
+    const handleClick = (o,t) => {
         setOverview(o);
-        console.log(o);
+        setTitle(t);
     }
     return (
         <div className="container mt-5 mb-5">
@@ -57,7 +58,7 @@ export default  function App()
                                         </div>
                                         <div className="row">
                                             <div className="col-md-5">
-                                                <button type="button" className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={()=> handleClick(movie.overview)}>Description</button>
+                                                <button type="button" className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={()=> handleClick(movie.overview,movie.title)}>Description</button>
                                             </div>
                                             <div className="col-md-7">
                                                 <small>Date : {movie.release_date}</small>
@@ -67,7 +68,7 @@ export default  function App()
                                             <div className="modal-dialog modal-dialog-scrollable">
                                                 <div className="modal-content">
                                                     <div className="modal-header bg-primary">
-                                                        <h1 className="modal-title fs-5" id="staticBackdropLabel" style={{color:"white"}}>Modal title</h1>
+                                                        <h1 className="modal-title fs-5" id="staticBackdropLabel" style={{color:"white"}}>{title}</h1>
                                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div className="modal-body" style={{color:'black'}}>
